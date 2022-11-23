@@ -159,7 +159,8 @@ def main(training: Training) -> None:
     print(info.get_message())
 
 
-WORKOUT_TYPES: typing.Dict[str, {typing.Union[Swimming, Running, SportsWalking]}] = (
+WORKOUT_TYPES: typing.Dict[str, {typing.
+                                 Union[Swimming, Running, SportsWalking]}] = (
     {
         'SWM': Swimming,
         'RUN': Running,
