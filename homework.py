@@ -148,9 +148,9 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
-    if workout_type in WORKOUT_TYPES:
-        return WORKOUT_TYPES[workout_type](*data)
-    return None
+    if workout_type not in WORKOUT_TYPES:
+        raise NotImplementedError('Некорректное название тренировки')
+    return WORKOUT_TYPES[workout_type](*data)
 
 
 def main(training: Training) -> None:
@@ -159,7 +159,7 @@ def main(training: Training) -> None:
     print(info.get_message())
 
 
-WORKOUT_TYPES: typing.Dict[str, {Swimming | Running | SportsWalking}] = (
+WORKOUT_TYPES: typing.Dict[str, Union[Swimming, Running, SportsWalking]] = (
     {
         'SWM': Swimming,
         'RUN': Running,
@@ -172,10 +172,6 @@ if __name__ == '__main__':
         ('RUN', [15000, 1, 75]),
         ('WLK', [420, 4, 20, 42]),
     ]
-
     for workout_type, data in packages:
         training = read_package(workout_type, data)
-        if training:
-            main(training)
-        else:
-            print('Некорректные данные на входе', workout_type, data)
+        main(training)
