@@ -1,6 +1,4 @@
-from __future__ import annotations
-
-import typing
+import typing as ty
 
 
 class InfoMessage:
@@ -159,7 +157,9 @@ def main(training: Training) -> None:
     print(info.get_message())
 
 
-WORKOUT_TYPES: typing.Dict[str, Union[Swimming, Running, SportsWalking]] = (
+WORKOUT_TYPES: ty.Dict[str, ty.Union[ty.Type[Swimming],
+                                     ty.Type[Running],
+                                     ty.Type[SportsWalking]]] = (
     {
         'SWM': Swimming,
         'RUN': Running,
